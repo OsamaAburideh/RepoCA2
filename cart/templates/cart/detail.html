@@ -90,7 +90,7 @@
 <div class="row">
     <div class="col-md-12">
             <p class="text-right">
-                <form action="" method="POST">
+                <form action="{% url 'orders:order_create' %}" method="POST">
                     {% csrf_token %}
                     <script
                         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
