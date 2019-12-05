@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group, User
 from .forms import SignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
-
+from .email import Email
 
 def product_list(request, category_slug=None):
     category = None
@@ -42,6 +42,9 @@ def signupView(request):
             signup_user = User.objects.get(username=username)
             customer_group = Group.objects.get(name='Customer')
             customer_group.user_set.add(signup_user)
+            user_email = form.cleaned_data['email']
+            Email.sendSignUpConfirmation(request, username, user_email)
+
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form':form})
