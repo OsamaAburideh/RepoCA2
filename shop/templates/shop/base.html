@@ -7,6 +7,24 @@
   <link href="{% static 'css/base.css' %}" rel="stylesheet">
 </head>
 <body>
+<ul class="nav navbar-nav">
+    {% if request.user.is_authenticated %}
+		<li>
+				<a href="{% url 'shop:product_list' %}">Products</a>
+    </li>
+		<li>
+        <a href="{% url 'signout' %}">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+    </li>
+		{% else %}
+		<li>
+				<a href="{% url 'signup' %}">Sign Up<i class="fas fa-user-plus"></i></a>
+		</li>
+		<li>
+				<a href="{% url 'signin' %}">Sign In<i class="fas fa-sign-in-alt"></i></a>
+		</li>
+		{% endif %}
+    
+    
   <div id="header">
     <a href="/" class="logo">My shop</a>
   </div>
